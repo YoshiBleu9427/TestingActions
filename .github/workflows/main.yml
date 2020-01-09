@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@master
       - name: Build zip
         run: |
-          zip -r vendor.zip files_to_zip/*
+          zip --junk-paths -r vendor.zip files_to_zip/*
       - name: Delete Previous Release
         uses: WyriHaximus/github-action-delete-package@master
         with:
