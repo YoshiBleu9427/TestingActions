@@ -2,16 +2,13 @@ name: CI build pack
 on:
   push:
 jobs:
-  any-name-goes-here-really:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2  # get repo
       - run: mkdir vendor-zip  # make vendor-zip directory
-      - run: ls -al # I don't know where I am or why this isn't working
-      - run: ls -al files_to_zip # I don't know where I am or why this isn't working
       - run: zip -r vendor-zip/vendor.zip files_to_zip  # zips contents from files_to_zip into vendor-zip/vendor.zip
       - uses: actions/upload-artifact@master  # uploads the created zip to your repo as an artifact
         with:
           name: vendor
           path: vendor-zip
-      - run: rm -rf vendor-zip  # clean up (maybe not needed)
