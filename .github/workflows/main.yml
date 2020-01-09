@@ -6,9 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2  # get repo
-      - run: mkdir vendor-zip  # make vendor-zip directory
-      - run: zip -r vendor-zip/vendor.zip files_to_zip  # zips contents from files_to_zip into vendor-zip/vendor.zip
-      - uses: actions/upload-artifact@master  # uploads the created zip to your repo as an artifact
+      - uses: actions/upload-artifact@master  # upload the whole thing as a zip without subfolders
         with:
           name: vendor
-          path: vendor-zip
+          path: files_to_zip
