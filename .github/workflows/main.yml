@@ -8,7 +8,7 @@ jobs:
       - run: mkdir vendor-zip  # make vendor-zip directory
       - uses: montudor/action-zip@v0.1.0  # calls the zip action
         with:
-          args: zip -qq -r ./vendor-zip/vendor.zip ./files_to_zip  # zips contents from files_to_zip into vendor-zip/vendor.zip
+          args: zip -r vendor-zip/vendor.zip files_to_zip  # zips contents from files_to_zip into vendor-zip/vendor.zip
       - uses: actions/upload-artifact@master  # uploads the created zip to your repo as an artifact
         with:
           name: vendor
