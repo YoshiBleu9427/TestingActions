@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@master
       - name: Build zip
         run: |
-          zip --junk-paths -r vendor.zip files_to_zip/*
+          cd files_to_zip; zip -r ../vendor.zip *; cd ..
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.0.0
