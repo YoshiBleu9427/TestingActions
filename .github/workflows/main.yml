@@ -10,20 +10,14 @@ jobs:
       - name: Build zip
         run: |
           zip --junk-paths -r vendor.zip files_to_zip/*
-      - name: Delete Previous Release
-        uses: WyriHaximus/github-action-delete-package@master
-        with:
-          packageVersionId: latest-push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: latest-push
-          release_name: Latest Automatic Release
+          tag_name: autorelease-${{ github.sha }}
+          release_name: Automatic Release (commit ${{ github.sha }})
           draft: false
           prerelease: false
       - name: Upload Release Asset
