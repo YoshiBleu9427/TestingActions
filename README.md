@@ -21,3 +21,10 @@ files_to_zip.zip
  |_ hello.txt
  \_ main.c
 ```
+
+### How it works
+
+Commit and push any modifications, and an action will
+ - checkout the code
+ - build a zip from folder files_to_zip
+ - commit and push the generated zip file as `build/vendor.zip`
