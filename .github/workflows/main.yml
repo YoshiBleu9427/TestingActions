@@ -9,28 +9,15 @@ jobs:
         uses: actions/checkout@master
       - name: Build zip
         run: |
-          cd files_to_zip; zip -r ../vendor.zip *; cd ..
+          cd files_to_zip; zip -r ../build/vendor.zip *; cd ..
 
-      - name: Set up Python 3.7
-        uses: actions/setup-python@v1
+      - name: Publish
+        uses: github-actions-x/commit@v2.3
         with:
-          python-version: 3.7
-      - name: Run script to remove previous zip
-        run: |
-          python ci/remove_latest_release_assets.py
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.GITHUB_REPOSITORY }}
-          ASSET_NAME: "vendor.zip"
-          # outputs RELEASE_UPLOAD_URL
-
-      - name: Upload Release Asset
-        id: upload-release-asset 
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: $RELEASE_UPLOAD_URL # env var set by the python script above 
-          asset_path: ./vendor.zip
-          asset_name: vendor.zip
-          asset_content_type: application/zip
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'master'
+          commit-message: 'publish'
+          force-add: 'true'
+          files: build/vendor.zip
+          name: Publish Action
+          email: my.github@email.com 
