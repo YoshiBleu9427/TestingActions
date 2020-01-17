@@ -18,3 +18,7 @@ jobs:
     - name: Run script
       run: |
         python ci/remove_latest_release_assets.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.GITHUB_REPOSITORY }}
+        ASSET_NAME: "vendor.zip"
